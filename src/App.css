@@ -1,6 +1,13 @@
 .App {
   text-align: center;
 }
+.formGroup{
+  border: 2px solid black;
+  /* background-color:antiquewhite; */
+}
+input{
+  max-width: 80%;
+}
 
 .App-logo {
   height: 40vmin;
