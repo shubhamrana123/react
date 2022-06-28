@@ -1,43 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useForm } from "react-hook-form"
+import Userdata from './components/Userdata';
+import Userform from './components/Userform';
+
 function App() {
+  const [userData,setUserData]= useState({});
+  const [color,setColor] = useState({  brand: "Ford",
+  model: "Mustang",
+  year: "1964",
+  color: "red"})
   const { register, handleSubmit, formState: { errors } } = useForm();
   function submit(data) {
     localStorage.setItem('formData',data);
     
   }
 
-  return (
+  // const addUser = ()=>
+  // {
+  //   setUserData(prevState=>([
+  //       ...prevState,{}]))
 
-<div className='formGroup'>
-      <h1> form</h1>
-      <form onSubmit={handleSubmit(submit)}>
-        <label>
-          FirstName:
-        </label>
-        <input type="text" {...register('firstName', { required: true, maxLength: 10 })}></input>
-        {errors.firstName && <p>please check first name</p>}<br></br>
-        <label>
-          Last Name:
-        </label>
-        <input type="text" {...register('lastName', { required: true, maxLength: 10 })}></input>
-        {errors.lastName && <p>please check last name</p>} <br></br>
-        <label>
-          Email:
-        </label>
-        <input type="text" {...register('email', { required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}></input>
-        {errors.email && <p>please check email</p>}
-        <br></br>
-        <label>
-          Password:
-        </label>
-        <input type="password" {...register('password', { required: true, pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/ })}></input>
-        {errors.password && <p>please check password</p>} <br></br>
-        <input type="submit" value="Submit" ></input>
-      </form>
+  // }
+
+
+  return (
+<>
+{/* <Userform/>
+ <Userdata/> */}
+ <BrowserRouter>
+<Routes>
+    <Route path="userdata" element={<Userdata></Userdata>} />
+<Route path="/" element={<Userform></Userform>} />
+</Routes>
+ </BrowserRouter>
  
-      </div>
+ {/* < userList/> */}
+</>
+/* <div className='formGroup'>
+    <h1>{color.brand}</h1>
+    <p> its model is {color.model} and color is {color.color}</p>
+ <button type="button" onClick={()=>{
+  setColor(previousState=>{
+    // console.log(previousState);
+    return {...previousState,color:'green'}
+  })
+ }}>Green</button>
+      </div> */
   );
 }
 
