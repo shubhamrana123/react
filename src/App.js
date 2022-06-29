@@ -4,25 +4,27 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 import Userdata from './components/Userdata';
 import Userform from './components/Userform';
+import Editform from './components/Editform';
 
 function App() {
   const [userData,setUserData]= useState({});
-  const [color,setColor] = useState({  brand: "Ford",
-  model: "Mustang",
-  year: "1964",
-  color: "red"})
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  function submit(data) {
-    localStorage.setItem('formData',data);
+  // const [color,setColor] = useState({  brand: "Ford",
+  // model: "Mustang",
+  // year: "1964",
+  // color: "red"})
+  // const { register, handleSubmit, formState: { errors } } = useForm();
+  // function submit(data) {
+  //   localStorage.setItem('formData',data);
     
-  }
-
-  // const addUser = ()=>
-  // {
-  //   setUserData(prevState=>([
-  //       ...prevState,{}]))
-
   // }
+
+  const addUser = (data)=>
+  {
+    console.log("added",JSON.stringify(data))
+    setUserData(prevState=>(
+      {...prevState,data}
+    ))
+  }
 
 
   return (
@@ -32,7 +34,8 @@ function App() {
  <BrowserRouter>
 <Routes>
     <Route path="userdata" element={<Userdata></Userdata>} />
-<Route path="/" element={<Userform></Userform>} />
+<Route path="/" element={<Userform addUser={addUser}></Userform>} />
+<Route path='/edit' element={<Editform list={userData}></Editform>}/>
 </Routes>
  </BrowserRouter>
  

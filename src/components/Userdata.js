@@ -1,17 +1,25 @@
 import React ,{useEffect}from 'react'
-
+import { useNavigate } from 'react-router-dom'
 
 function Userdata()  {
     // useEffect(()=>{
-    //     const userData=JSON.parse(localStorage.getItem('formdata'))
+    //     let userData=JSON.parse(localStorage.getItem('formdata'))
+    //     console.log(userData);
     // })
+    let navigate=useNavigate();
         const userData=JSON.parse(localStorage.getItem('formdata'))
-   
+function updateData(e,name){
+// console.log(e.target,name);
+navigate('/edit')
+
+}
   return (
   <>
   <table>
-    <tr>
-        <th>
+    <thead> 
+      <tr>
+      
+      <th>
             FirstName
         </th>
         <th>
@@ -23,10 +31,17 @@ function Userdata()  {
         <th>
             Password
         </th>
-    </tr>
+        <th>
+       Action
+        </th>
+        </tr>
+        </thead>
+       
+  
    
-    <tr>
-        <td>
+    <tbody>
+      <tr>
+      <td>
       {userData.firstName}
         </td>
         <td>
@@ -38,9 +53,12 @@ function Userdata()  {
         <td>
       {userData.password}
         </td>
-    </tr>
-    <tr>
         <td>
+            <button onClick={(e)=>{updateData(e,userData.firstName)}}>Edit</button>
+        </td>
+      </tr>
+    <tr>
+    <td>
       {userData.firstName}
         </td>
         <td>
@@ -52,7 +70,14 @@ function Userdata()  {
         <td>
       {userData.password}
         </td>
+        <td>
+            {/* <button onClick={updateData()}>Edit</button> */}
+        </td>
     </tr>
+    </tbody>
+    <tbody>
+       
+    </tbody>
   </table>
   </>
   )
