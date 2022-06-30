@@ -1,7 +1,7 @@
 import React ,{useEffect}from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Userdata()  {
+function Userdata(props)  {
     // useEffect(()=>{
     //     let userData=JSON.parse(localStorage.getItem('formdata'))
     //     console.log(userData);
@@ -15,6 +15,7 @@ navigate('/edit')
 }
   return (
   <>
+  {/* {JSON.stringify(props.list[0])} */}
   <table>
     <thead> 
       <tr>
@@ -40,40 +41,30 @@ navigate('/edit')
   
    
     <tbody>
-      <tr>
-      <td>
-      {userData.firstName}
+    {props.list.map((data)=>( 
+    <tr  key={data.firstName}>
+    {/* data=  {JSON.stringify(data)} */}
+    <td >
+      {(data.firstName)}
+        </td>
+        <td  >
+      {data.lastName}
+        </td>
+        <td   >
+      {data.email}
+        </td>
+        <td >
+      {data.password}
         </td>
         <td>
-      {userData.lastName}
+        <button onClick={(e)=>{updateData(e,userData.firstName)}}>Edit</button>
         </td>
-        <td>
-      {userData.email}
-        </td>
-        <td>
-      {userData.password}
-        </td>
-        <td>
-            <button onClick={(e)=>{updateData(e,userData.firstName)}}>Edit</button>
-        </td>
-      </tr>
-    <tr>
-    <td>
-      {userData.firstName}
-        </td>
-        <td>
-      {userData.lastName}
-        </td>
-        <td>
-      {userData.email}
-        </td>
-        <td>
-      {userData.password}
-        </td>
-        <td>
-            {/* <button onClick={updateData()}>Edit</button> */}
-        </td>
-    </tr>
+    </tr>)
+        
+      )}
+   
+   
+   
     </tbody>
     <tbody>
        

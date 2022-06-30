@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 import Userdata from './components/Userdata';
 import Userform from './components/Userform';
 import Editform from './components/Editform';
-
+import ComA from './ComA';
+import { Provider } from 'react';
+const fName= createContext();
 function App() {
-  const [userData,setUserData]= useState({});
+  const [userData,setUserData]= useState([]);
+  
+ 
   // const [color,setColor] = useState({  brand: "Ford",
   // model: "Mustang",
   // year: "1964",
@@ -22,18 +26,20 @@ function App() {
   {
     console.log("added",JSON.stringify(data))
     setUserData(prevState=>(
-      {...prevState,data}
+      [...prevState,data]
     ))
   }
 
 
   return (
 <>
+<fName.Provider value={'shubhamrree'}><ComA/></fName.Provider>
+{/* <ComA></ComA> */}
 {/* <Userform/>
  <Userdata/> */}
  <BrowserRouter>
 <Routes>
-    <Route path="userdata" element={<Userdata></Userdata>} />
+    <Route path="userdata" element={<Userdata list={userData}></Userdata>} />
 <Route path="/" element={<Userform addUser={addUser}></Userform>} />
 <Route path='/edit' element={<Editform list={userData}></Editform>}/>
 </Routes>
@@ -55,3 +61,4 @@ function App() {
 }
 
 export default App;
+export {fName};
