@@ -1,10 +1,15 @@
 import React from 'react'
-import { fName } from '../App'
+import { fName ,lName} from '../App'
 const ComC = () => {
   return (
 
     <fName.Consumer>{(fname)=>{
-        return <p>this is {fname}</p>
+        return (
+<lName.Consumer>{(lName)=>{
+return <p>this is {fname},{lName}</p>
+}}</lName.Consumer>
+        )
+       
     }}</fName.Consumer>
   )
 }

@@ -1,13 +1,14 @@
 import React, { createContext, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useForm } from "react-hook-form"
 import Userdata from './components/Userdata';
 import Userform from './components/Userform';
 import Editform from './components/Editform';
 import ComA from './ComA';
 import { Provider } from 'react';
 const fName= createContext();
+const lName = createContext()
+const userformData = createContext()
 function App() {
   const [userData,setUserData]= useState([]);
   
@@ -33,7 +34,13 @@ function App() {
 
   return (
 <>
-<fName.Provider value={'shubhamrree'}><ComA/></fName.Provider>
+<fName.Provider value={'shubham'}>
+ 
+    <userformData.Provider value={userData}>
+  <ComA/>
+  </userformData.Provider>
+ 
+  </fName.Provider>
 {/* <ComA></ComA> */}
 {/* <Userform/>
  <Userdata/> */}
@@ -41,7 +48,7 @@ function App() {
 <Routes>
     <Route path="userdata" element={<Userdata list={userData}></Userdata>} />
 <Route path="/" element={<Userform addUser={addUser}></Userform>} />
-<Route path='/edit' element={<Editform list={userData}></Editform>}/>
+<Route path='/edit' element={<Editform list={userData} ></Editform>}/>
 </Routes>
  </BrowserRouter>
  
@@ -61,4 +68,4 @@ function App() {
 }
 
 export default App;
-export {fName};
+export {fName,lName,userformData};

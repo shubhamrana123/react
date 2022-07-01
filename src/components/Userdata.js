@@ -1,20 +1,23 @@
-import React ,{useEffect}from 'react'
+import React ,{useContext, useEffect}from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import Editform from './Editform';
+import { userformData } from '../App';
 function Userdata(props)  {
+  const userDatas =useContext(userformData)
     // useEffect(()=>{
     //     let userData=JSON.parse(localStorage.getItem('formdata'))
     //     console.log(userData);
     // })
     let navigate=useNavigate();
         const userData=JSON.parse(localStorage.getItem('formdata'))
-function updateData(e,name){
+function updateData(){
 // console.log(e.target,name);
 navigate('/edit')
 
 }
   return (
   <>
+   {/* {JSON.stringify(userDatas.list[0])} */}
   {/* {JSON.stringify(props.list[0])} */}
   <table>
     <thead> 
@@ -70,6 +73,7 @@ navigate('/edit')
        
     </tbody>
   </table>
+
   </>
   )
 }
